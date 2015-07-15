@@ -88,7 +88,7 @@ def thank_you():
 def pay_error():
     return locals()
 
-@auth.requires_membership('manager')
+@auth.requires_login()
 def my_orders():
     db.purchase_order._common_filter = lambda query: query&(db.purchase_order.created_by==auth.user.id)
     return dict(grid=SQLFORM.smartgrid(db.purchase_order,create=False,editable=False,deletable=False,csv=False))
